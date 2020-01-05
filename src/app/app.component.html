@@ -1,0 +1,15 @@
+
+<inescoin-checkout-summary
+  *ngIf="!showPayment"
+  [walletAddress]="walletAddress"
+  [cart]="cart"
+  (onStartPayment)="onStartPaymentHandler($event)"></inescoin-checkout-summary>
+<div *ngIf="showPayment">
+  <inescoin-checkout-payment
+    [paymentInfo]="paymentInfo"></inescoin-checkout-payment>
+
+  <div class="text-center">
+    <button class="btn btn-default" (click)="showPayment=false">{{ '#Back' }}</button>
+  </div>
+</div>
+

@@ -1,0 +1,29 @@
+<div class="container text-center">
+
+  <h1>{{ inescoinConfig.label }}</h1>
+
+  <div class="label-transaction" *ngIf="transfer.transactionHash">
+    <label>Transaction Hash </label> <a href="https://explorer.inescoin.org/?transaction={{ transfer.transactionHash }}" target="_blank">{{ transfer.transactionHash }}</a>
+  </div>
+  <div class="loader" *ngIf="!transfer.transactionHash || (node.height - transfer.height) < checkoutData.confirmations"></div>
+  <div class="label-transfer" *ngIf="!transfer.transactionHash">Waitting transfer ...</div>
+  <div class="label-waitting-confirmations" *ngIf="(node.height - transfer.height) < checkoutData.confirmations">Waiting <b>{{ checkoutData.confirmations }}</b> confirmations ...</div>
+
+  <div class="label-confirmation" [class.waiting]="(node.height - transfer.height) < checkoutData.confirmations" *ngIf="transfer.transactionHash"><span *ngIf="(node.height - transfer.height) >= checkoutData.confirmations">&#10003;</span> {{ (node.height - transfer.height) || 0}} confirmations</div>
+
+  <div  *ngIf="!transfer.transactionHash">
+    <div class="label-to"><label>To:</label> {{ checkoutData.address }}</div>
+    <div class="label-amount"><label>Amount:</label> {{ checkoutData.amount }} INES</div>
+    <div class="label-wallet-id"><label>Wallet id:</label> {{ checkoutData.walletId }}</div>
+
+    <div class="qr-code-box">
+      <h3>Scan this QR Code</h3>
+      <ngx-qrcode
+          qrc-element-type="canvas"
+          [qrc-value]="qrCodeString"
+          qrc-class="text-center"
+          qrc-errorCorrectionLevel="L">
+      </ngx-qrcode>
+    </div>
+  </div>
+</div>

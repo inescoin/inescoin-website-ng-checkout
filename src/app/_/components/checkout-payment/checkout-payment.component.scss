@@ -1,0 +1,59 @@
+.loader {
+  border: 8px solid #F1F1F1; /* Light grey */
+  border-top: 8px solid #9900CC; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 30px auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.container {
+	width: 976px;
+	margin: 100px auto 0;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.label-amount label, .label-to label, .label-wallet-id label, .label-transaction label {
+	font-weight: 700;
+}
+
+.label-transaction label {
+	display: block;
+}
+.label-transfer {
+	margin-bottom: 30px;
+}
+
+.label-confirmation {
+	padding: 10px;
+	background-color: #00FF00;
+	width: 200px;
+	margin: 10px auto;
+	border-radius: 10px;
+	font-size: 16pt;
+	font-weight: 600;
+}
+
+.qr-code-box {
+	border: solid 1px #F1F1F1;
+	width: 300px;
+	margin: 10px auto;
+}
+
+
+.icon-check {
+	width: 50px;
+}
+
+.waiting {
+	background-color: #FFA500 !important;
+}
