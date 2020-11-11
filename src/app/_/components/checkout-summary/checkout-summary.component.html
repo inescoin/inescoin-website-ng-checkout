@@ -3,10 +3,10 @@
 		<div class="col-12">
 			<div class="card mt-4">
 				<div class="card-header">
-					{{ '#Panier' }}
+					{{ '#Cart' | dgTranslate }}
 				</div>
 				<div class="card-body text-center">
-					<p>{{ '#Votre panier est vide.' }}</p>
+					<p>{{ '#Your cart is empty' | dgTranslate }}</p>
 				</div>
 			</div>
 		</div>
@@ -16,7 +16,7 @@
 		<div class="col-12 col-md-7">
 			<div class="card mt-4">
 				<div class="card-header">
-					{{ '#Panier' }}
+					{{ '#Cart' | dgTranslate }}
 				</div>
 				<div class="card-body">
 					<div class="row product-line" *ngFor="let product of model.products">
@@ -45,86 +45,86 @@
 
 			<div class="card mt-4">
 				<div class="card-header">
-					 {{ '#Information client' }}
+					 {{ '#Information client' | dgTranslate }}
 				</div>
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Prénom' }}</label>
+								<label>{{ '#Firstname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.customer.firstname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Nom' }}</label>
+								<label>{{ '#Lastname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.customer.lastname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{ '#Email' }}</label>
+								<label>{{ '#Email' | dgTranslate }}</label>
 								<input type="email" [(ngModel)]="model.customer.email" class="form-control">
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<h5>{{ '#Shipping address' }}</h5>
+							<h5>{{ '#Shipping address' | dgTranslate }}</h5>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Firstname' }}</label>
+								<label>{{ '#Firstname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.firstname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Lastname' }}</label>
+								<label>{{ '#Lastname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.lastname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Société' }}</label>
+								<label>{{ '#Company' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.company" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{ '#Address' }}</label>
+								<label>{{ '#Address' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.address" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{ '#Address (next)' }}</label>
+								<label>{{ '#Address (next)' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.addressNext" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Zipcode' }}</label>
+								<label>{{ '#Zipcode' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.zipcode" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#City' }}</label>
+								<label>{{ '#City' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.city" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Country' }}</label>
+								<label>{{ '#Country' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.country" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Phone' }}</label>
+								<label>{{ '#Phone' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.phone" class="form-control">
 							</div>
 						</div>
@@ -133,66 +133,66 @@
 						<label class="form-check-label">
 							<input class="mr-2" type="checkbox" autocomplete="off" [(ngModel)]="model.isNotSameAddress">
 
-							{{ '#Utiliser une autre adresse de facturation' }}
+							{{ '#Utiliser une autre adresse de facturation' | dgTranslate }}
 						</label>
 					</div>
 					<div class="row" *ngIf="model.isNotSameAddress">
 						<div class="col-12">
-							<h5>{{ '#Billing address' }}</h5>
+							<h5>{{ '#Billing address' | dgTranslate }}</h5>
 						</div>
 					</div>
 					<div class="row" *ngIf="model.isNotSameAddress">>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Firstname' }}</label>
+								<label>{{ '#Firstname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.firstname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Lastname' }}</label>
+								<label>{{ '#Lastname' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.lastname" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Company' }}</label>
+								<label>{{ '#Company' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.company" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{ '#Address' }}</label>
+								<label>{{ '#Address' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.address" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{ '#Address (next)' }}</label>
+								<label>{{ '#Address (next)' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.addressNext" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Zipcode' }}</label>
+								<label>{{ '#Zipcode' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.zipcode" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#City' }}</label>
+								<label>{{ '#City' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.city" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Country' }}</label>
+								<label>{{ '#Country' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.country" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>{{ '#Phone' }}</label>
+								<label>{{ '#Phone' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.phone" class="form-control">
 							</div>
 						</div>
@@ -203,13 +203,13 @@
 		<div class="col-12 col-md-5">
 			<div class="card mt-4 sticky-top" >
 				<div class="card-header">
-					{{ '#Summary' }}
+					{{ '#Summary' | dgTranslate }}
 				</div>
 				<div class="card-body">
 					<div class="container">
 						<div class="row">
 							<div class="col-6">
-								<span class="part-title">{{ '#Total HT' }}</span>
+								<span class="part-title">{{ '#Total HT' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
 								<span class="price total_product">{{ model.totalWithoutVat }} €</span>
@@ -217,7 +217,7 @@
 						</div>
 						<div class="row row_total_tax">
 							<div class="col-6">
-								<span class="part-title">{{ '#Total TVA' }}</span>
+								<span class="part-title">{{ '#Total TVA' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
 								<span class="price total_tax">{{ model.vat }} €</span>
@@ -225,7 +225,7 @@
 						</div>
 						<div class="row total-price">
 							<div class="col-6">
-								<span class="part-title">{{ '#Total' }}</span>
+								<span class="part-title">{{ '#Total' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
 								<span class="price total_price">{{ model.total }} €</span>
@@ -233,7 +233,7 @@
 						</div>
 						<div class="row total-price mt-4">
 							<div class="col-6">
-								<span class="part-title">{{ '#Total' }}</span>
+								<span class="part-title">{{ '#Total' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
 								<span class="price total_price">{{ model.inescoinTotal }} INES</span> <br />
@@ -243,7 +243,7 @@
 					</div>
 
 					<div class="container text-center mt-4">
-						<button (click)="startPayment()" class="btn btn-primary btn-block">{{ '#Payer' }}</button>
+						<button (click)="startPayment()" class="btn btn-primary btn-block">{{ '#Payer' | dgTranslate }}</button>
 					</div>
 				</div>
 			</div>

@@ -2,14 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
 // import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { DoorgetsTranslateModule , NgTranslate, NgTranslateAbstract } from 'doorgets-ng-translate';
+
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http';
 import { CheckoutPaymentComponent } from './_/components/checkout-payment/checkout-payment.component';
 import { CheckoutSummaryComponent } from './_/components/checkout-summary/checkout-summary.component';
+
+export function newNgTranslate(http: HttpClient) {
+  return new NgTranslate(http, '../../assets/public/locale');
+}
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -24,7 +35,12 @@ import { CheckoutSummaryComponent } from './_/components/checkout-summary/checko
     HttpClientModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DoorgetsTranslateModule.forRoot({
+      provide: NgTranslateAbstract,
+      useFactory: (newNgTranslate),
+      deps: [Http]
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

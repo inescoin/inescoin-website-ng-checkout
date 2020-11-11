@@ -12,7 +12,7 @@ function cmd($cmd)
 
 
 // Build de la version de dev en mode production
-cmd('./node_modules/.bin/ng build --prod');
+cmd('ng build --prod');
 
 
 // Recupération de la page HTML
