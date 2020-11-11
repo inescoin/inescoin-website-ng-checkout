@@ -19,10 +19,10 @@
     <div class="qr-code-box">
       <h3>Scan this QR Code</h3>
       <ngx-qrcode
-          qrc-element-type="canvas"
-          [qrc-value]="qrCodeString"
-          qrc-class="text-center"
-          qrc-errorCorrectionLevel="L">
+          [elementType]="elementType"
+          [errorCorrectionLevel]="correctionLevel"
+          [value]="qrCodeString"
+          cssClass="bshadow">
       </ngx-qrcode>
     </div>
   </div>

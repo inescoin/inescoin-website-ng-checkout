@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bshadow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(5px 5px 5px #222222);
+  opacity: .5;
+}

@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "inescoin-checkout"
+    }
+  },
+  "defaultProject": "inescoin-checkout",
+  "cli": {
+    "analytics": false
+  }
 }

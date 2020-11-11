@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { inescoinConfig } from './config/inescoin.config';
 
+import { DoorgetsTranslateService } from 'doorgets-ng-translate';
+
 @Component({
   selector: inescoinConfig.name + '-checkout',
   templateUrl: './app.component.html',
@@ -14,7 +16,9 @@ export class AppComponent implements OnInit {
   cart: any[] = [];
   tempCart: any = {};
 
-  constructor(private elementRef: ElementRef,) {
+  constructor(
+    private elementRef: ElementRef,
+    private doorgetsTranslateService: DoorgetsTranslateService) {
   }
 
   ngOnInit() {
@@ -47,6 +51,12 @@ export class AppComponent implements OnInit {
           "quantity":4
       }
     };
+
+    this.doorgetsTranslateService.init({
+      languages: ['en', 'fr'],
+      current: 'en',
+      default: 'en'
+    });
 
     console.log('this.tempCart', this.tempCart);
     this._init();

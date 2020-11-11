@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+
 import { HttpService } from '../../../services/http.service';
 import { inescoinConfig } from '../../../config/inescoin.config';
 
@@ -12,6 +14,9 @@ export class CheckoutPaymentComponent implements OnInit {
   @Input() paymentInfo: any = {};
 
 	inescoinConfig = inescoinConfig;
+
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
 
 	qrCodeString: string = '';
 
