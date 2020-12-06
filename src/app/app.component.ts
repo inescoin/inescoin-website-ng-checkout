@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.walletAddress = this.elementRef.nativeElement.getAttribute('walletAddress') || this.walletAddress;
-    console.log('this.walletAddress', this.walletAddress);
 
     this.tempCart = {
       "181e3e96-317b-40e8-acc6-3d83a561a34b": {

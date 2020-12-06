@@ -86,7 +86,7 @@
 								<input type="text" [(ngModel)]="model.shipping.lastname" class="form-control">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Company' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.shipping.company" class="form-control">
@@ -141,7 +141,7 @@
 							<h5>{{ '#Billing address' | dgTranslate }}</h5>
 						</div>
 					</div>
-					<div class="row" *ngIf="model.isNotSameAddress">>
+					<div class="row" *ngIf="model.isNotSameAddress">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Firstname' | dgTranslate }}</label>
@@ -154,7 +154,7 @@
 								<input type="text" [(ngModel)]="model.billing.lastname" class="form-control">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Company' | dgTranslate }}</label>
 								<input type="text" [(ngModel)]="model.billing.company" class="form-control">

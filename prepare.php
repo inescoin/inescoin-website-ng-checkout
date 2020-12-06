@@ -2,7 +2,6 @@
 
 $helpMessage = PHP_EOL . 'Usage: php prepare.php' . PHP_EOL . PHP_EOL;
 
-
 // Utils
 function cmd($cmd)
 {
@@ -10,10 +9,8 @@ function cmd($cmd)
   shell_exec($cmd);
 }
 
-
 // Build de la version de dev en mode production
-cmd('ng build --prod');
-
+cmd('./node_modules/.bin/ng build --prod --aot=false --build-optimizer=false');
 
 // Recupération de la page HTML
 $indexPagePath = './dist/inescoin-checkout/index.html';
@@ -58,7 +55,8 @@ var_dump('Pushed to -> ' . $template, $template);
 
 cmd('rm -rf ../inescoin-website-viewer/public/assets/ng/*');
 
-cmd("cp dist/inescoin-checkout/* ../inescoin-website-viewer/public/assets/ng/");
-
+cmd("cp -Rp dist/inescoin-checkout/* ../inescoin-website-viewer/public/assets/ng/");
+cmd("mkdir -p ../inescoin-website-viewer/public/assets/public/locale");
+cmd("cp -Rp dist/inescoin-checkout/assets/public/locale/* ../inescoin-website-viewer/public/assets/public/locale/");
 
 echo PHP_EOL . 'FINISH !' . PHP_EOL;

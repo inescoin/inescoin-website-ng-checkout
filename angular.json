@@ -61,7 +61,11 @@
                 }
               ]
             }
-          }
+          },
+          "allowedCommonJsDependencies": [
+            "rxjs",
+            "rxjs-compat"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -72,7 +76,11 @@
             "production": {
               "browserTarget": "inescoin-checkout:build:production"
             }
-          }
+          },
+          "allowedCommonJsDependencies": [
+            "rxjs",
+            "rxjs-compat"
+          ]
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
