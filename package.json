@@ -24,6 +24,7 @@
     "@techiediaries/ngx-qrcode": "^9.1.0",
     "bootstrap": "^4.4.1",
     "doorgets-ng-translate": "^2.0.3",
+    "lodash": "^4.17.21",
     "ngx-qrcode2": "0.0.9",
     "rxjs": "~6.6.3",
     "rxjs-compat": "6.2.2",

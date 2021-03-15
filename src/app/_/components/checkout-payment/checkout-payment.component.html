@@ -1,8 +1,8 @@
-<div class="container text-center">
+<div class="container-fluid">
 
   <h1>{{ inescoinConfig.label }}</h1>
 
-  <div class="label-transaction" *ngIf="transfer.transactionHash">
+  <!-- <div class="label-transaction" *ngIf="transfer.transactionHash">
     <label>Transaction Hash </label> <a href="https://explorer.inescoin.org/?transaction={{ transfer.transactionHash }}" target="_blank">{{ transfer.transactionHash }}</a>
   </div>
   <div class="loader" *ngIf="!transfer.transactionHash || (node.height - transfer.height) < checkoutData.confirmations"></div>
@@ -25,5 +25,60 @@
           cssClass="bshadow">
       </ngx-qrcode>
     </div>
+  </div> -->
+
+  <div class="row mt-4 mb-4 checkout-block-payment" *ngFor="let code of qrCode; let i=index;">
+    <div class="col-5">
+      <h3>Transaction {{ i + 1 }}</h3>
+      <div class="row mt-4">
+        <div class="col-12">
+          <span class="part-title">{{ '#Total HT' | dgTranslate }}</span> : <b>{{ code.checkout.totalWithoutVat }} €</b>
+        </div>
+      </div>
+      <div class="row row_total_tax">
+        <div class="col-12">
+          <span class="part-title">{{ '#Total TVA' | dgTranslate }}</span> : <b>{{ code.checkout.vat }} €</b>
+        </div>
+      </div>
+      <div class="row total-price">
+        <div class="col-12">
+          <span class="part-title">{{ '#Total' | dgTranslate }}</span> : <b>{{ code.checkout.total }} €</b>
+        </div>
+      </div>
+      <div class="row total-price mt-4">
+        <div class="col-12">
+          <span class="part-title">{{ '#Total' | dgTranslate }} INES</span> : <b>{{ code.checkout.inescoinTotal }} INES</b>
+        </div>
+      </div>
+
+      <div class="row product-line" *ngFor="let product of code.products">
+        <div class="col-2 col-md-2 d-none d-sm-block">
+          <img class="img-fluid" src="{{ product.image }}" alt="{{ product.title }}">
+        </div>
+        <div class="col-5 col-md-5 offset-md-1">
+          <div class="product-name">{{ product.title }}</div>
+          <div class="quantity">
+            <div class="product_quantity">
+              <input size="2" type="text" autocomplete="off" readonly="true" class="cart_quantity_input" [(ngModel)]="product.quantity">
+            </div>
+          </div>
+        </div>
+        <div class="col-5 col-md-4 text-right">
+          <small>{{ getProductTotalPrice(product) }}</small>
+          <span class="product-price">{{ getProductTotalPrice(product, true) }}</span>
+          <small>{{ getProductTotalPriceVat(product) }}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-7 text-right">
+      <ngx-qrcode
+            [elementType]="elementType"
+            [errorCorrectionLevel]="correctionLevel"
+            [value]="code.qrCode"
+            cssClass="bshadow">
+        </ngx-qrcode>
+    </div>
   </div>
 </div>
+

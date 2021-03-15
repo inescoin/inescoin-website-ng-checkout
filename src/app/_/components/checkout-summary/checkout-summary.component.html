@@ -1,5 +1,5 @@
-<div class="container" style="min-height: 800px;">
-	<div class="row" *ngIf="!model.products.length">
+<div class="container-fluid" style="min-height: 800px;">
+	<div class="row" *ngIf="!checkout.products.length">
 		<div class="col-12">
 			<div class="card mt-4">
 				<div class="card-header">
@@ -12,14 +12,15 @@
 		</div>
 	</div>
 
-	<div class="row" *ngIf="model.products.length">
+	<div class="row" *ngIf="checkout.products.length">
 		<div class="col-12 col-md-7">
 			<div class="card mt-4">
 				<div class="card-header">
 					{{ '#Cart' | dgTranslate }}
+					<span class="badge badge-light ml-2">{{ checkout.products.length }} {{ '#products' | dgTranslate }}</span>
 				</div>
 				<div class="card-body">
-					<div class="row product-line" *ngFor="let product of model.products">
+					<div class="row product-line" *ngFor="let product of checkout.products">
 						<div class="col-2 col-md-2 d-none d-sm-block">
 							<img class="img-fluid" src="{{ product.image }}" alt="{{ product.title }}">
 						</div>
@@ -36,8 +37,9 @@
 							</div>
 						</div>
 						<div class="col-6 col-md-4 text-right">
-							<small>{{ getProductTotalPrice(product.amount, product.currency) }}</small>
-							<span class="product-price">{{ getProductTotalPrice(product.amount * product.quantity, product.currency) }}</span>
+							<small>{{ getProductTotalPrice(product) }}</small>
+							<span class="product-price">{{ getProductTotalPrice(product, true) }}</span>
+							<small>{{ getProductTotalPriceVat(product) }}</small>
 						</div>
 					</div>
 				</div>
@@ -52,19 +54,19 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Firstname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.customer.firstname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.customer.firstname" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Lastname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.customer.lastname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.customer.lastname" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Email' | dgTranslate }}</label>
-								<input type="email" [(ngModel)]="model.customer.email" class="form-control">
+								<input type="email" [(ngModel)]="checkout.customer.email" maxlength="30" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -77,123 +79,123 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Firstname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.firstname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.firstname" maxlength="15" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Lastname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.lastname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.lastname" maxlength="15" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Company' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.company" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.company" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Address' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.address" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.address" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Address (next)' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.addressNext" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.addressNext" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Zipcode' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.zipcode" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.zipcode" maxlength="6" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#City' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.city" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.city" maxlength="10" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Country' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.country" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.country" maxlength="10" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Phone' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.shipping.phone" class="form-control">
+								<input type="text" [(ngModel)]="checkout.shipping.phone" maxlength="14" class="form-control">
 							</div>
 						</div>
 					</div>
 					<div class="form-group mb-4">
 						<label class="form-check-label">
-							<input class="mr-2" type="checkbox" autocomplete="off" [(ngModel)]="model.isNotSameAddress">
+							<input class="mr-2" type="checkbox" autocomplete="off" [(ngModel)]="checkout.isNotSameAddress">
 
 							{{ '#Utiliser une autre adresse de facturation' | dgTranslate }}
 						</label>
 					</div>
-					<div class="row" *ngIf="model.isNotSameAddress">
+					<div class="row" *ngIf="checkout.isNotSameAddress">
 						<div class="col-12">
 							<h5>{{ '#Billing address' | dgTranslate }}</h5>
 						</div>
 					</div>
-					<div class="row" *ngIf="model.isNotSameAddress">
+					<div class="row" *ngIf="checkout.isNotSameAddress">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Firstname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.firstname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.firstname" maxlength="15" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Lastname' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.lastname" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.lastname" maxlength="15" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Company' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.company" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.company" maxlength="15" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Address' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.address" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.address" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{ '#Address (next)' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.addressNext" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.addressNext" maxlength="20" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Zipcode' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.zipcode" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.zipcode" maxlength="6" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#City' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.city" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.city" maxlength="10" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Country' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.country" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.country" maxlength="10" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{ '#Phone' | dgTranslate }}</label>
-								<input type="text" [(ngModel)]="model.billing.phone" class="form-control">
+								<input type="text" [(ngModel)]="checkout.billing.phone" maxlength="14" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -212,7 +214,7 @@
 								<span class="part-title">{{ '#Total HT' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
-								<span class="price total_product">{{ model.totalWithoutVat }} €</span>
+								<span class="price total_product">{{ checkout.totalWithoutVat }} €</span>
 							</div>
 						</div>
 						<div class="row row_total_tax">
@@ -220,7 +222,7 @@
 								<span class="part-title">{{ '#Total TVA' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
-								<span class="price total_tax">{{ model.vat }} €</span>
+								<span class="price total_tax">{{ checkout.vat }} €</span>
 							</div>
 						</div>
 						<div class="row total-price">
@@ -228,7 +230,7 @@
 								<span class="part-title">{{ '#Total' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
-								<span class="price total_price">{{ model.total }} €</span>
+								<span class="price total_price">{{ checkout.total }} €</span>
 							</div>
 						</div>
 						<div class="row total-price mt-4">
@@ -236,8 +238,8 @@
 								<span class="part-title">{{ '#Total' | dgTranslate }}</span>
 							</div>
 							<div class="col-6 text-right">
-								<span class="price total_price">{{ model.inescoinTotal }} INES</span> <br />
-								<small>1 INES = {{ model.inescoinPrice }} €</small>
+								<span class="price total_price">{{ checkout.inescoinTotal }} INES</span> <br />
+								<small>1 INES = {{ checkout.inescoinPrice }} €</small>
 							</div>
 						</div>
 					</div>

@@ -8,31 +8,18 @@ import * as _ from 'lodash';
   styleUrls: ['./checkout-summary.component.scss']
 })
 export class CheckoutSummaryComponent implements OnInit {
-	@Input() walletAddress = '';
 	@Output() onStartPayment = new EventEmitter();
-	@Input() cart = [];
 
-	model: any = {
-		walletId: 'DLS-000001',
-		walletAddress: '',
-		inescoinTotal: 0,
-		total: 0,
-		totalWithoutVat: 0,
-		vat: 0,
-		isNotSameAddress: false,
-		products: [],
-		customer: {},
-		billing: {},
-		shipping: {},
-		inescoinPrice: 0.042
-	}
+	@Input() cart = [];
+	@Input() walletAddress = '';
+	@Input() checkout: any = {};
 
   constructor() { }
 
   ngOnInit() {
-  	this.model.walletAddress = this.walletAddress;
+  	this.checkout.walletAddress = this.walletAddress;
 
-  	this.model.products = this.cart;
+  	this.checkout.products = this.cart;
 
   	this.initTotal();
   }
@@ -52,39 +39,39 @@ export class CheckoutSummaryComponent implements OnInit {
 	}
 
 	initTotal() {
-		this.model.total = 0;
-		this.model.vat = 0;
-		this.model.totalWithoutVat = 0;
+		this.checkout.total = 0;
+		this.checkout.vat = 0;
+		this.checkout.totalWithoutVat = 0;
 
-		for (let i = this.model.products.length - 1; i >= 0; i--) {
-			let total = this.model.products[i].amount * this.model.products[i].quantity;
+		for (let i = this.checkout.products.length - 1; i >= 0; i--) {
+			let total = this.checkout.products[i].amount * this.checkout.products[i].quantity;
 			let percent = 0;
 
-			this.model.totalWithoutVat += total;
+			this.checkout.totalWithoutVat += total;
 
-			if (this.model.products[i].vat) {
-				percent = this.model.products[i].amount / 100 * this.model.products[i].vat;
+			if (this.checkout.products[i].vat) {
+				percent = this.checkout.products[i].amount / 100 * this.checkout.products[i].vat;
 				total = total + percent;
-				this.model.vat += percent * this.model.products[i].quantity;
+				this.checkout.vat += percent * this.checkout.products[i].quantity;
 			}
 
-			this.model.total += total;
+			this.checkout.total += total;
 		}
 
-		this.model.total = Number.parseFloat((this.model.total).toString()).toFixed(2);
+		this.checkout.total = Number.parseFloat((this.checkout.total).toString()).toFixed(2);
 
-		this.model.inescoinTotal = Number.parseFloat((this.model.total / this.model.inescoinPrice).toString()).toFixed(2);
+		this.checkout.inescoinTotal = Number.parseFloat((this.checkout.total / this.checkout.inescoinPrice).toString()).toFixed(2);
 
-		this.model.vat = Number.parseFloat((this.model.vat).toString()).toFixed(2);
-		this.model.totalWithoutVat = Number.parseFloat((this.model.totalWithoutVat).toString()).toFixed(2);
+		this.checkout.vat = Number.parseFloat((this.checkout.vat).toString()).toFixed(2);
+		this.checkout.totalWithoutVat = Number.parseFloat((this.checkout.totalWithoutVat).toString()).toFixed(2);
 	}
 
 	startPayment() {
-		this.onStartPayment.emit(this.model);
+		this.onStartPayment.emit(this.checkout);
 	}
 
 	removeProduct(product) {
-		_.remove(this.model.products, {
+		_.remove(this.checkout.products, {
 			sku: product.sku
 		});
 
@@ -92,18 +79,32 @@ export class CheckoutSummaryComponent implements OnInit {
   	this._saveCart();
 	}
 
-	getProductTotalPrice(price, currency?) {
-		let prefix = currency && currency === 'usd' ? '$' : '';
-		let suffix = currency && currency === 'eur' ? ' €' : '';
+	getProductTotalPrice(product: any, total?) {
+		let price = total ? product.amount * product.quantity : product.amount * 1.00;
+
+		let percent = 0.00;
+		if (product.vat) {
+			console.log(product);
+			percent = price / 100 * product.vat;
+			price = price + percent;
+		}
+
+		let prefix = product.currency && product.currency === 'usd' ? '$' : '';
+		let suffix = product.currency && product.currency === 'eur' ? ' €' : '';
 		return prefix + (Number.parseFloat((price).toString()).toFixed(2)) + suffix;
 	}
 
-	private _saveCart() {
-    let cart = {};
-    for (let product of this.model.products) {
-      cart[product.sku] = product;
-    }
+	getProductTotalPriceVat(product, total?) {
+		let price = total ? product.amount * product.quantity : product.amount;
+		return product.vat ? ' (VAT ' + product.vat + '%)' : '';
+	}
 
-    localStorage.setItem('inescoin-cart', JSON.stringify(cart));
-  }
+	private _saveCart() {
+	    let cart = {};
+	    for (let product of this.checkout.products) {
+	      cart[product.sku] = product;
+	    }
+
+	    localStorage.setItem('inescoin-cart', JSON.stringify(cart));
+  	}
 }

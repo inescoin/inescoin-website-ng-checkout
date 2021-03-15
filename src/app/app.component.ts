@@ -14,7 +14,23 @@ export class AppComponent implements OnInit {
   paymentInfo: any = {};
 
   cart: any[] = [];
+
   tempCart: any = {};
+
+  checkout: any = {
+    walletId: null,
+    walletAddress: '',
+    inescoinTotal: 0,
+    total: 0,
+    totalWithoutVat: 0,
+    vat: 0,
+    isNotSameAddress: false,
+    products: [],
+    customer: {},
+    billing: {},
+    shipping: {},
+    inescoinPrice: 0.042
+  }
 
   constructor(
     private elementRef: ElementRef,
